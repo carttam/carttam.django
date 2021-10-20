@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask To Answer</title>
+
+    <!-- Css-Component -->
+    <link rel="stylesheet" href="{% static 'css/component/bootstrap.min.css' %}" />
+    <!-- Css-main -->
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+</head>
+
+<body>
+    <!-- Start-Top-Nav-Segment -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            {% include '../_partial/top_nav.html' %}
+        </div>
+    </nav>
+
+    <!-- Start-Body-Segment -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 border border-2 border-primary rounded mt-5 p-5">
+                {% block Body %}{% endblock Body %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Js-Component -->
+    <script src="{% static 'js/component/JQuery.js' %}"></script>
+    <script src="{% static 'js/component/bootstrap.bundle.min.js' %}"></script>
+    <!-- Js-main -->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

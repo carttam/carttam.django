@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %} {% load static %} {% block TopNav %} {% endblock TopNav %} {% block Body %}
+    <!-- Login-Form -->
+
+    <form method="post">
+
+    <!-- Custom-Error -->
+    {% if message %}
+    <div class="alert alert-danger">
+        {{message}}
+    </div>
+    {% endif %}
+
+    {% csrf_token %}
+        <div class="mb-3 row justify-content-center">
+            <label for="staticEmail" class="col-12 col-lg-2 col-form-label">Email</label>
+            <div class="col-12 col-lg-4">
+                <input type="text" class="form-control" id="staticEmail" name="username"/>
+                {% if form.username.errors %}
+                <ul class="alert alert-danger">
+                    {% for error in form.username.errors %}
+                    <li>
+                        <small>{{error | escape}}</small>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label for="inputPassword" class="col-12 col-lg-2 col-form-label">Password</label>
+            <div class="col-12 col-lg-4">
+                <input type="password" class="form-control" id="inputPassword" name="password"/>
+                {% if form.password.errors %}
+                <ul class="alert alert-danger">
+                    {% for error in form.password.errors %}
+                    <li>
+                        <small>{{error | escape}}</small>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 col-md-4 col-lg-1">
+                <input
+                        type="submit"
+                        class="btn btn-info"
+                        id="staticEmail"
+                        value="Login"
+                />
+            </div>
+        </div>
+    </form>
+{% endblock Body %}
