@@ -7,6 +7,7 @@ from ata.settings import BASE_DIR
 max_length = 50
 fs = FileSystemStorage(location=str(BASE_DIR)+'/webApp/static/asset/')
 
+
 # Create your models here.
 class Question(models.Model):
     id = models.AutoField(primary_key=True)

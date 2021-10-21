@@ -18,7 +18,7 @@ class Index(View):
     @method_decorator(login_required(login_url='/login'))
     def get(self, request):
         return render(request, 'index.html',{
-            'quest':Question.objects.all(),
+            'quest':Question.objects.all().order_by('dateTime'),
             'userImage':UserImage.objects.get(user=request.user)
         })
 
@@ -26,8 +26,13 @@ class Index(View):
 class Quest(View):
     @method_decorator(login_required(login_url='/login'))
     def get(self, request, quest_id):
+        answer = Answer.objects.filter(question_id = quest_id).order_by('dateTime')
+        for ans in answer:
+            ans.image = UserImage.objects.get(user_id=ans.user.id)
         return render(request, 'quest.html',{
-            'quest':Question.objects.get(id=quest_id)
+            'quest':Question.objects.get(id=quest_id),
+            'userImage':UserImage.objects.get(user=request.user),
+            'answers':answer,
         })
 
 class Login(View):
