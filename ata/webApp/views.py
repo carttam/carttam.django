@@ -17,8 +17,18 @@ from .forms import *
 class Index(View):
     @method_decorator(login_required(login_url='/login'))
     def get(self, request):
-        return render(request, 'index.html')
+        return render(request, 'index.html',{
+            'quest':Question.objects.all(),
+            'userImage':UserImage.objects.get(user=request.user)
+        })
 
+
+class Quest(View):
+    @method_decorator(login_required(login_url='/login'))
+    def get(self, request, quest_id):
+        return render(request, 'quest.html',{
+            'quest':Question.objects.get(id=quest_id)
+        })
 
 class Login(View):
     def get(self, request):
@@ -55,7 +65,8 @@ class Signup(View):
 
     def post(self,request):
         form = SignUpForm(request.POST)
-        if form.is_valid():
+        fform = UserImageForm(request,request.FILES)
+        if fform.is_valid() and form.is_valid():
             user = User.objects.create(
                 username=form.cleaned_data['username'],
                 password=make_password(form.cleaned_data['password']),
@@ -63,6 +74,12 @@ class Signup(View):
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'])
             if user is not None:
-                login(request=request, user=user)
+                UserImage.objects.create(
+                    user=user,
+                    image=fform.cleaned_data['image']
+                )
+                login(request,user)
                 return redirect('index')
-        return render(request, 'signup.html',{'form':form})
+            else:
+                user.delete()
+        return render(request, 'signup.html',{'form':form,'fform':fform})

@@ -7,7 +7,7 @@
             <li class="nav-item pe-2 d-table-cell align-middle">
                 <a class="navbar-brand" href="{% url 'index' %}">
                     <img
-                            src="{% static 'asset/wp-2021-01-linkedin-profile-picture-consider-format.webp' %}"
+                            src="{% static 'asset' %}{{userImage.image.url}}"
                             alt="user-logined-background"/>
                 </a>
             </li>

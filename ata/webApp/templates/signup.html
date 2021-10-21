@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %} {% load static %} {% block TopNav %} {% endblock TopNav %} {% block Body %}
     <!-- Login-Form -->
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
     <!-- Custom-Error -->
     {% if message %}
@@ -9,9 +9,6 @@
         {{message}}
     </div>
     {% endif %}
-    <h1>
-        here : 
-    </h1>
     {% csrf_token %}
         <div class="mb-3 row justify-content-center">
             <label for="staticEmail" class="col-12 col-lg-2 col-form-label">UserName</label>
@@ -80,6 +77,21 @@
                 {% if form.password.errors %}
                 <ul class="alert alert-danger">
                     {% for error in form.password.errors %}
+                    <li>
+                        <small>{{error | escape}}</small>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label for="formFileSm" class="col-12 col-lg-2 form-label">Select Avatar Picture</label>
+            <div class="col-12 col-lg-4">
+                <input class="form-control" id="formFileSm" type="file" name="image">
+                {% if fform.image.errors %}
+                <ul class="alert alert-danger">
+                    {% for error in fform.image.errors %}
                     <li>
                         <small>{{error | escape}}</small>
                     </li>

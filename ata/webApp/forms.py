@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import fields
 from .models import *
 
 
@@ -9,6 +10,13 @@ class LoginForm(forms.Form):
 
     class Meta:
         model = User
+
+
+class UserImageForm(forms.ModelForm):
+    image = forms.ImageField(required=True)
+    class Meta:
+        model = UserImage
+        fields = ['image']
 
 
 class SignUpForm(forms.ModelForm):

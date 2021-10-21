@@ -2,15 +2,23 @@
 <!-- Quest-List -->
 
 <div class="row">
-  <div class="col-6 mb-3">
-    <div class="card text-center">
-      <div class="card-header">Marci</div>
-      <div class="card-body">
-        <h5 class="card-title">how make div center using css</h5>
-        <a class="card-link" href="#">more -></a>
-      </div>
-      <div class="card-footer text-muted">2 days ago</div>
+    {% for q in quest %}
+    <div class="col-6 mb-3">
+        <div class="card text-center">
+            <div class="card-header">
+                {{q.user}}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{q.title}}
+                </h5>
+                <a class="card-link" href="{% url 'quest' q.id %}">more -></a>
+            </div>
+            <div class="card-footer text-muted">
+                {{q.dateTime}}
+            </div>
+        </div>
     </div>
-  </div>
+    {% endfor %}
 </div>
 {% endblock Body %}
