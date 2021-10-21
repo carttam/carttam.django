@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Permission, User
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -45,3 +46,23 @@ class Ask(View):
     def get(self, request):
         logout(request)
         return redirect('index')
+
+
+class Signup(View):
+    def get(self,request):
+        return render(request,'signup.html')
+
+
+    def post(self,request):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create(
+                username=form.cleaned_data['username'],
+                password=make_password(form.cleaned_data['password']),
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'])
+            if user is not None:
+                login(request=request, user=user)
+                return redirect('index')
+        return render(request, 'signup.html',{'form':form})

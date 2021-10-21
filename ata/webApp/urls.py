@@ -19,6 +19,7 @@ from webApp.views import *
 urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('login', Login.as_view(), name='login'),
+    path('signup', Signup.as_view(), name='signup'),
     path('ask', Ask.as_view(), name='ask'),
     path('logout', Logout.as_view(), name='logout'),
 ]
