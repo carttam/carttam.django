@@ -1,0 +1,23 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3 row justify-content-center">
+        <label for="staticEmail" class="col-12 col-lg-2 col-form-label">Answer :</label>
+        <div class="col-12 col-lg-10">
+            <textarea name="answer" rows="7" class="form-control"></textarea>
+            {% if form.answer.errors %}
+            <ul class="alert alert-danger">
+                {% for error in form.answer.errors %}
+                <li>
+                    <small>{{error | escape}}</small>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8 col-md-4 col-lg-1">
+            <input type="submit" class="btn btn-info" id="staticEmail" value="Answer" />
+        </div>
+    </div>
+</form>

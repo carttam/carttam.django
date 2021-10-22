@@ -9,6 +9,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import View
+from datetime import datetime
 from .models import *
 from datetime import datetime
 from .forms import *
@@ -18,17 +19,33 @@ class Index(View):
     @method_decorator(login_required(login_url='/login'))
     def get(self, request):
         return render(request, 'index.html',{
-            'quest':Question.objects.all().order_by('dateTime'),
+            'quest':Question.objects.all().order_by('-dateTime'),
         })
 
 
 class Quest(View):
     @method_decorator(login_required(login_url='/login'))
-    def get(self, request, quest_id):
+    def get(self, request, quest_id, form = None):
         return render(request, 'quest.html',{
             'quest':Question.objects.get(id=quest_id),
-            'answers':Answer.objects.filter(question__id=quest_id)
+            'answers':Answer.objects.filter(question__id=quest_id),
+            'form':form
         })
+
+
+    @method_decorator(login_required(login_url='/login'))
+    def post(self, request, quest_id):
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            ans = Answer.objects.create(
+                user=request.user,
+                answer=form.cleaned_data['answer'],
+                question=get_object_or_404(Question,id=quest_id),
+                dateTime=datetime.now()
+            )
+            if ans is not None:
+                return redirect('quest',quest_id=quest_id)
+        return self.get(request, quest_id, form)
 
 class Login(View):
     def get(self, request):

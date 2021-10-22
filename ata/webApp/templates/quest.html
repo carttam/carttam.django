@@ -11,7 +11,6 @@
             </div>
             <div class="card-footer text-muted">
                 <!-- Comment-Part -->
-
                 <div class="container mt-3">
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-8">
@@ -21,8 +20,8 @@
                             {% for answer in answers %}
                             <div class="card p-3 mb-2 text-center">
                                 <div class="d-flex flex-row justify-content-center">
-                                    <img src="{% static 'asset' %}{{answer.user.photo.url}}"
-                                        height="40" width="40" class="rounded-circle" alt="user-image" />
+                                    <img src="{% static 'asset' %}{{answer.user.photo.url}}" height="40" width="40"
+                                        class="rounded-circle" alt="user-image" />
                                     <div class="d-flex flex-column ms-2">
                                         <h6 class="mb-1 text-primary">{{answer.user.first_name}}</h6>
                                         <p class="comment-text mt-3">
@@ -42,6 +41,11 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        {% include '_partial/form_answer.html' %}
     </div>
 </div>
 {% endblock Body %}
