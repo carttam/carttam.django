@@ -6,13 +6,31 @@
     <div class="mb-3 row justify-content-center">
         <label for="staticEmail" class="col-12 col-form-label">Quest Title:</label>
         <div class="col-12">
-            <input type="text" class="form-control" id="staticEmail" />
+            <input type="text" class="form-control" id="staticEmail" name="title" />
+            {% if form.title.errors %}
+            <ul class="alert alert-danger">
+                {% for error in form.title.errors %}
+                <li>
+                    <small>{{error | escape}}</small>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
     </div>
     <div class="row mb-3 justify-content-center">
         <label for="staticEmail" class="col-12 col-form-label">Description:</label>
         <div class="col-12">
-            <textarea id="staticEmail" class="form-control" rows="7"></textarea>
+            <textarea id="staticEmail" class="form-control" rows="7" name="description"></textarea>
+            {% if form.description.errors %}
+            <ul class="alert alert-danger">
+                {% for error in form.description.errors %}
+                <li>
+                    <small>{{error | escape}}</small>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
     </div>
     <div class="row justify-content-center">

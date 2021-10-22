@@ -29,4 +29,11 @@ class AnswerForm(forms.Form):
 
     class Meta:
         models = Answer
-        fields = ['answer', 'question_id']
+        fields = ['answer']
+
+
+class AskForm(forms.Form):
+    title = forms.CharField(required=True,max_length=255)
+    description = forms.CharField(required=True)
+    class Meta:
+        models = Question

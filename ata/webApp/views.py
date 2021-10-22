@@ -70,9 +70,24 @@ class Logout(View):
 
 
 class Ask(View):
+    @method_decorator(login_required(login_url='/login'))
     def get(self, request):
-        logout(request)
-        return redirect('index')
+        return render(request,'ask.html')
+
+
+    @method_decorator(login_required(login_url='/login'))
+    def post(self, request):
+        form = AskForm(request.POST)
+        if form.is_valid():
+            q = Question.objects.create(
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                user=request.user,
+                dateTime=datetime.now()
+            )
+            if q is not None:
+                return redirect('index')
+        return render(request,'ask',{'form':form})
 
 
 class Signup(View):
