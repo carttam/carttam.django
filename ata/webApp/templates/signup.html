@@ -88,10 +88,10 @@
         <div class="mb-3 row justify-content-center">
             <label for="formFileSm" class="col-12 col-lg-2 form-label">Select Avatar Picture</label>
             <div class="col-12 col-lg-4">
-                <input class="form-control" id="formFileSm" type="file" name="image">
-                {% if fform.image.errors %}
+                <input class="form-control" id="formFileSm" type="file" name="photo">
+                {% if form.photo.errors %}
                 <ul class="alert alert-danger">
-                    {% for error in fform.image.errors %}
+                    {% for error in form.photo.errors %}
                     <li>
                         <small>{{error | escape}}</small>
                     </li>

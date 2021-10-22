@@ -2,31 +2,22 @@
 <!-- Logined -->
 {% if user.is_authenticated %}
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav d-table-row">
-            <li class="nav-item pe-2 d-table-cell align-middle">
-                <a class="navbar-brand" href="{% url 'index' %}">
-                    <img
-                            src="{% static 'asset' %}{{userImage.image.url}}"
-                            alt="user-logined-background"/>
-                </a>
-            </li>
-            <li class="nav-item pe-2 d-table-cell align-middle">
-                <a href="{% url 'index' %}" class="nav-link active">{{ user }}</a>
-            </li>
-            <li class="nav-item pe-2 d-table-cell align-middle">
-                <a class="nav-link" href="{% url 'ask' %}">Ask</a>
-            </li>
-            <li class="nav-item pe-2 d-table-cell align-middle">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
-        </ul>
-    </div>
-{% else %}
-    <!-- Not Login -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav d-table-row">
+        <li class="nav-item pe-2 d-table-cell align-middle">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="{% static 'asset' %}{{user.photo.url}}" alt="user-logined-background" />
+            </a>
+        </li>
+        <li class="nav-item pe-2 d-table-cell align-middle">
+            <a href="{% url 'index' %}" class="nav-link active">{{ user }}</a>
+        </li>
+        <li class="nav-item pe-2 d-table-cell align-middle">
+            <a class="nav-link" href="{% url 'ask' %}">Ask</a>
+        </li>
+        <li class="nav-item pe-2 d-table-cell align-middle">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+    </ul>
+</div>
 {% endif %}

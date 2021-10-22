@@ -10,7 +10,11 @@ class AdminQuestion(admin.ModelAdmin):
 class AdminAnwer(admin.ModelAdmin):
     #list_display = ['id','user', 'answer']
     pass
-@admin.register(UserImage)
-class AdminUserImage(admin.ModelAdmin):
-    #list_display = ['id','user', 'answer']
+
+
+admin.site.unregister(User)
+
+
+@admin.register(User)
+class AdminUser(admin.ModelAdmin):
     pass

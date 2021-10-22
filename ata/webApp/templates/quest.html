@@ -21,7 +21,7 @@
                             {% for answer in answers %}
                             <div class="card p-3 mb-2 text-center">
                                 <div class="d-flex flex-row justify-content-center">
-                                    <img src="{% static 'asset' %}{{answer.image.image.url}}"
+                                    <img src="{% static 'asset' %}{{answer.user.photo.url}}"
                                         height="40" width="40" class="rounded-circle" alt="user-image" />
                                     <div class="d-flex flex-column ms-2">
                                         <h6 class="mb-1 text-primary">{{answer.user.first_name}}</h6>
